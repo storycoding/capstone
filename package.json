@@ -1,0 +1,31 @@
+{
+  "name": "capstone",
+  "version": "1.0.0",
+  "description": "Hack Reactor back-end thesis project, microservice design and application scaling",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/storycoding/capstone.git"
+  },
+  "keywords": [
+    "back-end",
+    "microservice",
+    "hackreactor",
+    "nunoneves"
+  ],
+  "author": "NN",
+  "license": "UNLICENCED",
+  "bugs": {
+    "url": "https://github.com/storycoding/capstone/issues"
+  },
+  "homepage": "https://github.com/storycoding/capstone#readme",
+  "dependencies": {
+    "knex": "^0.14.2",
+    "koa": "^2.4.1",
+    "koa-router": "^7.4.0",
+    "pg": "^7.4.1"
+  }
+}
