@@ -1,8 +1,6 @@
 const saveBooking = require('./queries.js').saveBooking;
 
 const fs = require('fs');
-const destination = `./bookingData/bookings3.txt`;
-const writeStream = fs.createWriteStream(destination);
 
 const zips = {
   94102: [37.783783, -122.4114007],
@@ -69,23 +67,18 @@ const generateLocation = (code) => {
   return [lat,lon];
 };
 
-//make 500.000 copies every 2 minutes
-/*
-setTimeout(function(){ 
-
-  alert("Hello");
-
-}, 120000);
-*/
 
 const generateBooking = (users) => {
+  console.log(`current iteration: ${i}`)
+  let streams = {};
 
-  for (let i = 0; i < users; i++) { // 2 million
+    // create a new write stream each time
+    const destination = `./bookingData/bookings${i}.txt`;
+    streams[`writeStream${i}`] = fs.createWriteStream(destination);
 
-    //prefix with +1772 on read
-    let user_id = i;
+    for (let j = 0; j < users; j++) {
+      let user_id = j;  //prefix with +1772 on read
 
-    for (let j = 0; j < 5; j++) { // *5
       var driver_id = randomDriver();
 
       var loc_zip = dest_zip || randomZip();
@@ -103,15 +96,16 @@ const generateBooking = (users) => {
 
       let booking = `${user_id},${driver_id},${loc_zip},${loc_lat},${loc_lon},${dest_zip},${dest_lat},${dest_lon},${rate},${price}\n`;
 
-
-      saveBooking(user_id, driver_id, loc_zip, loc_lat, loc_lon, dest_zip, dest_lat, dest_lon, rate, price);
       
-      //writeStream.write(booking);
+      streams[`writeStream${i}`].write(booking);
     }
     
-  }
+  i++;
 
 }
 
 
-generateBooking(50000);
+let i = 0;
+
+//generateBooking(1000);
+setInterval(function(){ generateBooking(1000000) }, 1200000);

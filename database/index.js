@@ -10,5 +10,5 @@ const knex = require('knex') ({
   });
 
 module.exports = {
-  pg: knex
+  knex: knex
 }
