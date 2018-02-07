@@ -1,0 +1,15 @@
+config:
+  target: 'http://localhost:2000'
+  phases:
+    - duration: 120
+      arrivalRate: 10
+
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
+scenarios:
+  - flow:
+    - loop:
+      - get:
+          url: "/"
+      count: 100
