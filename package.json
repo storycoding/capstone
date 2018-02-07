@@ -23,9 +23,12 @@
   },
   "homepage": "https://github.com/storycoding/capstone#readme",
   "dependencies": {
+    "http": "0.0.0",
     "knex": "^0.14.2",
     "koa": "^2.4.1",
+    "koa-body": "^2.5.0",
     "koa-router": "^7.4.0",
+    "newrelic": "^2.7.0",
     "pg": "^7.4.1"
   }
 }
