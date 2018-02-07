@@ -1,35 +1,50 @@
 const knex = require('./index.js').knex;
 
-const saveLogin = function(lat, lon, zip) {
 
-	let query = `INSERT INTO passengers(lat, lon, zip) VALUES (${lat}, ${lon}, ${zip})`;
-	return knex.raw(query).then(console.log(query));
+const getAll = function(table, param, value) {
+
+	return knex(table)
+		.where(param, value)
+		.select()
 };
 
-const saveDriver = function(lat, lon, zip) {
+const saveLogin = function(user_id, zip, lat, lon, date_ms) {
 
-	let query = `INSERT INTO drivers(lat, lon, zip) VALUES (${lat}, ${lon}, ${zip})`;
+	let query = `INSERT INTO logins(user_id, zip, lat, lon, date_ms) VALUES (${user_id}, ${zip}, ${lat}, ${lon}, ${date_ms})`;
+
+	return knex.raw(query).then(function(item, err){
+		if(err) { console.error("saveLogin", err) }
+	});
+};
+
+const saveRide = function(id, small_loc_zip, loc_lat, loc_lon, small_dest_zip, dest_lat, dest_lon, driver_id, user_id, date_ms){
+
+	let query = `INSERT INTO rides(id, loc_zip, loc_lat, loc_lon, dest_zip, dest_lat, dest_lon, driver_id, user_id) VALUES (${id}, ${small_loc_zip}, ${loc_lat}, ${loc_lon}, ${small_dest_zip}, ${dest_lat}, ${dest_lon}, ${driver_id}, ${user_id})`;
+
+	return knex.raw(query).then(function(item, err){
+		if(err) { console.error("saveRide", err) }
+	});
+
+};
+
+const saveBooking = function(user_id, price, date_ms) {
+
+	let query = `INSERT INTO bookings(user_id, price, date_ms) VALUES (${user_id}, ${price}, ${date_ms})`;
+
+	return knex.raw(query).then(function(item, err){
+		if(err) { console.error("saveBooking", err) }
+	});
+};
+
+const getBooking = function(param, value) {
+	let query = `select * from bookings where ${param} = ${value}`; 
 	return knex.raw(query);
-};
-
-const saveBooking = function( user_id, driver_id, loc_zip, loc_lat, loc_lon, dest_zip, dest_lat, dest_lon, rate, price) {
-
-	let query = `INSERT INTO bookings(user_id, driver_id, loc_zip, loc_lat, loc_lon, dest_zip, dest_lat, dest_lon, rate, price) VALUES (${user_id}, ${driver_id}, ${loc_zip}, ${loc_lat}, ${loc_lon}, ${dest_zip}, ${dest_lat}, ${dest_lon}, ${rate}, ${price})`;
-
-	return knex.raw(query).then();
-};
-
-module.exports = {
-	saveBooking : saveBooking,
-	saveLogin : saveLogin,
-	saveDriver : saveDriver
 }
 
-
-
-// INSERT INTO passengers(id, lat, lon) VALUES (1966545626, 377446615, -1224149368)
-// INSERT INTO drivers(id, lat, lon) VALUES (763284024, 377836924, -1224111553);
-
-//INSERT INTO bookings(user_id, driver_id, loc_zip, loc_lat, loc_lon, dest_zip, dest_lat, dest_lon, rate, price) VALUES (0000031, 5069288, 94132, 37.7218297, -122.5029057, 94134, 37.71795, -122.424504, 1, 3.00);
-
-//SELECT reltuples AS approximate_row_count FROM pg_class WHERE relname = 'passengers';
+module.exports = {
+	getAll : getAll,
+	saveLogin : saveLogin,
+	saveRide : saveRide,
+	saveBooking : saveBooking,
+	getBooking : getBooking
+}
