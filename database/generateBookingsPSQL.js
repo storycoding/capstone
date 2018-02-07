@@ -1,4 +1,4 @@
-const saveBooking = require('./queries.js').saveBooking;
+const saveBooking = require('./queries.js').saveBookingOLD;
 
 const fs = require('fs');
 
@@ -93,29 +93,30 @@ const generateBooking = (users) => {
 
       let booking = `${user_id},${driver_id},${loc_zip},${loc_lat},${loc_lon},${dest_zip},${dest_lat},${dest_lon},${rate},${price}\n`;
       console.log(booking);
-      //saveBooking(user_id, driver_id, loc_zip, loc_lat, loc_lon, dest_zip, dest_lat, dest_lon, rate, price);
+      saveBooking(user_id, driver_id, loc_zip, loc_lat, loc_lon, dest_zip, dest_lat, dest_lon, rate, price);
     }
     
   }
     
+  console.log(`finished queueing: ${i}`)
+
   i++;
   start += increment;
   users += increment;
 
-
-  if (i < 20) {
-    setTimeout(function(){ generateBooking(users); }, 3000000); // 100000 per minute // 3000000
+  if (i < 200) {
+    setTimeout(function(){ generateBooking(users); }, 30000); // 100000 per minute // 3000000
   } else {
     return;
   }
 
 }
 
-let increment = 100000;
+let increment = 10000;
 
 let i = 0;
 let start = 0;
-let users = 100000;
+let users = 10000;
 
 generateBooking(users)
 
