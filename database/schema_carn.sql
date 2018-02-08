@@ -1,17 +1,6 @@
 CREATE DATABASE carn;
 \c carn;
 
-CREATE TABLE passengers (
-  id SERIAL PRIMARY KEY,
-  zip INT NOT NULL,
-  lat DECIMAL(9,7) NOT NULL,
-  lon DECIMAL(10,7) NOT NULL,
-  dest_zip INT NOT NULL,
-  dest_lat DECIMAL(9,7) NOT NULL,
-  dest_lon DECIMAL(10,7) NOT NULL,
-  last_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
 CREATE TABLE bookings (
   id SERIAL PRIMARY KEY,
   user_id INT NOT NULL,
