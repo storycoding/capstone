@@ -1,6 +1,5 @@
 const knex = require('./index.js').knex;
 
-
 const getAll = function(table, param, value) {
 
 	return knex(table)
@@ -17,9 +16,9 @@ const saveLogin = function(user_id, zip, lat, lon, date_ms) {
 	});
 };
 
-const saveRide = function(id, small_loc_zip, loc_lat, loc_lon, small_dest_zip, dest_lat, dest_lon, driver_id, user_id, date_ms){
+const saveRide = function(id, small_loc_zip, loc_lat, loc_lon, small_dest_zip, dest_lat, dest_lon, driver_id){
 
-	let query = `INSERT INTO rides(id, loc_zip, loc_lat, loc_lon, dest_zip, dest_lat, dest_lon, driver_id, user_id) VALUES (${id}, ${small_loc_zip}, ${loc_lat}, ${loc_lon}, ${small_dest_zip}, ${dest_lat}, ${dest_lon}, ${driver_id}, ${user_id})`;
+	let query = `INSERT INTO rides(id, loc_zip, loc_lat, loc_lon, dest_zip, dest_lat, dest_lon, driver_id) VALUES (${id}, ${small_loc_zip}, ${loc_lat}, ${loc_lon}, ${small_dest_zip}, ${dest_lat}, ${dest_lon}, ${driver_id})`;
 
 	return knex.raw(query).then(function(item, err){
 		if(err) { console.error("saveRide", err) }
