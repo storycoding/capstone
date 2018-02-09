@@ -9,7 +9,7 @@ const port = 2000;
 const server = http.createServer((req, res) => {
 
 	try {
-		query.getAll('bookings','id', 10).then(function(results) {
+		query.getAll('bookings','user_id', 100000).then(function(results) {
 			
 			res.statusCode = 200;
   			res.setHeader('Content-Type', 'application/json');

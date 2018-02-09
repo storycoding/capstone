@@ -23,15 +23,18 @@ const router = new Router();
 
 router.get('/', (ctx)=> {
 
-	try {
-		query.getAll('bookings','user_id', 10).then(function(results) { 
-			ctx.body = results;
-			console.log("results = ", results);
-		});	
-
-	} catch(error) {
-		console.log(`error = ${error}`);
-	}
+	ctx.body = query.getAll('bookings','user_id', 10).then((results) => { 
+		console.log("results = ", results);
+		//ctx.body = results;
+	})
+	
 });
 
 module.exports = router;
+
+
+/*
+ctx.body = query.getAll('bookings','user_id', 10).then((results) => { 
+		console.log("results = ", results);
+	})
+	*/
