@@ -1,7 +1,7 @@
 config:
   target: 'http://localhost:2000'
   phases:
-    - duration: 120
+    - duration: 600
       arrivalRate: 10
 
   defaults:
@@ -12,4 +12,4 @@ scenarios:
     - loop:
       - get:
           url: "/"
-      count: 80
+      count: 100

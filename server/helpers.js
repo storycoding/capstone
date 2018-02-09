@@ -40,7 +40,6 @@ module.exports = {
 	parseBooking : parseBooking
 }
 
-
 const getFullBooking = function(param, value) {
 
 	try {
