@@ -1,5 +1,9 @@
 const query = require('../database/queries.js');
 
+const parseZip = function(number) {
+	return 94100 + number;
+}
+
 const parseDate = function(milliseconds) {
 	return new Date(milliseconds *1000);
 };
@@ -32,6 +36,7 @@ const parseBooking =function(booking) {
 };
 
 module.exports = {
+	parseZip : parseZip,
 	parsePhone : parsePhone,
 	parseLat : parseLat,
 	parseLon : parseLon,
