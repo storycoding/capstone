@@ -2,8 +2,6 @@ const saveBooking = require('./queries.js').saveBooking;
 const saveRide = require('./queries.js').saveRide;
 const saveLogin = require('./queries.js').saveLogin;
 
-//[37.783783, -122.4114007]
-
 const zips = {
   94102: [783783, 4114007],
   94103: [7793322, 4341587],
@@ -52,7 +50,7 @@ const randomPrice = (rate, loc_zip, dest_zip) => {
 }
 
 const randomDriver = () => {
-  return (0000000 + Math.floor(Math.random() * (10000001)));
+  return (0000000 + Math.floor(Math.random() * (1000001)));
 }
 
 const randomZip = () => {
@@ -70,9 +68,9 @@ const generateLocation = (code) => {
 
 
 const generateBooking = (users) => {
-  console.log(`current iteration: ${i} / 200`);
 
   let end = users + increment;
+
   for (let j = users; j < end; j++) {
 
     if(id > 10000000) { return }
@@ -84,40 +82,30 @@ const generateBooking = (users) => {
     let user_date_ms;
 
     for (let k = 0; k < 5; k++) {
-      let driver_id = randomDriver();
 
+      let driver_id = randomDriver();
       let loc_zip =  randomZip();
       let loc =   generateLocation(loc_zip);
       let loc_lat =  loc[0];
       let loc_lon =  loc[1];
-
       let dest_zip = randomZip();
       let dest = generateLocation(dest_zip);
       let dest_lat = dest[0];
       let dest_lon = dest[1];
-
       let rate = randomRate();
       let price = randomPrice(rate, loc_zip, dest_zip);
-
-      //multiply by 1000 on read to get real date
-      let date_ms = Math.floor(Date.now()/1000 - (5 - k) * 100000 + Math.floor(Math.random() * 5000));
-
-      //console.log("user_id = " + user_id + "\nbooking date_ms = " + new Date(date_ms *1000));
-
-      // remember to add 94100 when reading
       let small_loc_zip = loc_zip - 94100;
       let small_dest_zip = dest_zip - 94100;
+      let date_ms = Math.floor(Date.now()/1000 - (5 - k) * 100000 + Math.floor(Math.random() * 5000));
 
-      console.log(`queued saveRide id:${id}`);
       saveRide(id, small_loc_zip, loc_lat, loc_lon, small_dest_zip, dest_lat, dest_lon, driver_id).then(()=>{console.log(`wrote saveRide id:${id}`)}
         );
-      }
 
-      console.log(`queued saveBooking id:${id}`);
       saveBooking(user_id, price, date_ms).then(()=>{console.log(`queued saveBooking id:${id}`)});
-      
-      id ++;
+
     }
+      
+    id ++;
   }
 
   users += increment;
