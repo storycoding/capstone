@@ -4,7 +4,7 @@
   "description": "Hack Reactor back-end thesis project, microservice design and application scaling",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc mocha"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,9 @@
     "koa-body": "^2.5.0",
     "koa-router": "^7.4.0",
     "newrelic": "^2.7.0",
-    "pg": "^7.4.1"
+    "nyc": "^11.4.1",
+    "pg": "^7.4.1",
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
     "chai": "^4.1.2",
