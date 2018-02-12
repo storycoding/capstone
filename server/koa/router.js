@@ -23,7 +23,7 @@ const router = new Router();
 
 router.get('/', async (ctx)=> {
 
-	ctx.body = await query.getAll('bookings','user_id', 10).then((results) => {
+	ctx.body = await query.getBooking('user_id', 10).then((results) => {
 		console.log("results = ", results);
 		//ctx.body = results;
 	})

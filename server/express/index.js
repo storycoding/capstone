@@ -7,7 +7,7 @@ const PORT = 2000;
 
 app.get('/', (req, res) => {
 
-	query.getAll('bookings','user_id', 10).then((results) => { 
+	query.getBooking('user_id', 10).then((results) => { 
 		res.send(results);
 	})
 });
