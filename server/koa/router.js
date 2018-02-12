@@ -21,9 +21,9 @@ const router = new Router();
 
 //without async
 
-router.get('/', (ctx)=> {
+router.get('/', async (ctx)=> {
 
-	ctx.body = query.getAll('bookings','user_id', 10).then((results) => { 
+	ctx.body = await query.getAll('bookings','user_id', 10).then((results) => {
 		console.log("results = ", results);
 		//ctx.body = results;
 	})
