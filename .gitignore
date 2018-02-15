@@ -4,8 +4,14 @@ config/production.json
 config/staging.json
 config/test.json
 
+# Notes
+notes.md
+
 # OS X
 .DS_Store
+
+# aws keys
+*.pem
 
 # Logs
 logs

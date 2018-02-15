@@ -125,4 +125,4 @@ let id = 1;
 let users = 1;
 let increment = 10000;
 
-generateBooking(users)
+//generateBooking(users);

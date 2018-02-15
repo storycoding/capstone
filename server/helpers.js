@@ -1,5 +1,23 @@
 const query = require('../database/queries.js');
 
+
+const randomRate = () => {
+  return Math.floor(Math.random() * (8) + 1);
+};
+
+const randomPrice = (rate, loc_zip, dest_zip) => {
+  if (loc_zip < dest_zip) {
+    var min = loc_zip;
+    var max = dest_zip;
+
+  } else {
+    var max = loc_zip;
+    var min = dest_zip;
+  }
+
+  return (100 * (Math.random() * (max - min) / 2 * rate + 3)).toFixed();
+};
+
 const parseZip = function(number) {
 	return 94100 + number;
 }
@@ -36,6 +54,8 @@ const parseBooking =function(booking) {
 };
 
 module.exports = {
+	randomRate : randomRate,
+	randomPrice : randomPrice,
 	parseZip : parseZip,
 	parsePhone : parsePhone,
 	parseLat : parseLat,

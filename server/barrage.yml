@@ -12,4 +12,4 @@ scenarios:
     - loop:
       - get:
           url: "/"
-      count: 100
+      count: 75
